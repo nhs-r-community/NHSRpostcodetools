@@ -26,3 +26,5 @@ Imports:
     tidyr,
     usethis,
     vctrs
+URL: https://github.com/nhs-r-community/NHSRpostcodetools
+BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
