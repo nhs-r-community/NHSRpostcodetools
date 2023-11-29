@@ -9,9 +9,11 @@ validate_out <- structure(
   list(
     place = c("place_1", "place_2", "place_3"),
     query_code = c("HD1 2UT", "HD1 2UU", "HD1 2UV"),
-    result = c(FALSE, TRUE, FALSE)),
+    result = c(FALSE, TRUE, FALSE)
+  ),
   class = c("tbl_df", "tbl", "data.frame"),
-  row.names = c(NA, -3L))
+  row.names = c(NA, -3L)
+)
 
 
 check_term_out1 <- list(
@@ -20,7 +22,7 @@ check_term_out1 <- list(
   month_terminated = 12L,
   longitude = -1.780629,
   latitude = 53.643909
-  )
+)
 
 
 check_term_out2 <- structure(
@@ -34,14 +36,20 @@ check_term_out2 <- structure(
         year_terminated = 1986L,
         month_terminated = 12L,
         longitude = -1.780629,
-        latitude = 53.643909)
+        latitude = 53.643909
       )
-    ),
+    )
+  ),
   class = c("tbl_df", "tbl", "data.frame"),
-  row.names = c(NA, -1L))
+  row.names = c(NA, -1L)
+)
 
 
-lonlat_out <- structure(list(longitude = -1.780629, latitude = 53.643909), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame"))
+lonlat_out <- structure(list(longitude = -1.780629,
+                             latitude = 53.643909),
+                        row.names = c(NA, -1L), class = c("tbl_df",
+                                                          "tbl",
+                                                          "data.frame"))
 
 
 
@@ -98,8 +106,8 @@ lonlat_out <- structure(list(longitude = -1.780629, latitude = 53.643909), row.n
   test_that({
     expect_equal(
       bulk_reverse_geocode(lonlat_out) %>%
-      ncol(),
-    34
+        ncol(),
+      34
     )
   })
 
@@ -115,4 +123,3 @@ lonlat_out <- structure(list(longitude = -1.780629, latitude = 53.643909), row.n
     autocomplete(bad_postcode)
   )
 })
-
