@@ -1,5 +1,5 @@
 req_base <- function(x = "") {
-  ua <- "github.com/francisbarton/myrmidon // httr2"
+  ua <- "github.com/nhs-r-community/NHSRpopulation // httr2"
 
   paste0("https://api.postcodes.io/", x, "postcodes/") |>
     httr2::request() |>
