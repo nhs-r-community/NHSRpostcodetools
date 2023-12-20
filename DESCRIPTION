@@ -19,11 +19,13 @@ Imports:
     assertthat,
     dplyr,
     httr2,
+    magrittr,
     purrr,
     rlang,
     stringr,
     tibble,
     tidyr,
+    tidyselect,
     usethis,
     vctrs
 URL: https://github.com/nhs-r-community/NHSRpostcodetools
