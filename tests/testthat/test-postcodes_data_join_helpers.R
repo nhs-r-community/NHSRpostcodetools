@@ -1,7 +1,7 @@
 postcodes <- c("HD1 2UT", "HD1 2UU", "HD1 2UV")
 bad_postcode <- "HD1 2VA" # doesn't exist
 test_df1 <- dplyr::tibble(place = paste0("place_", 1:3), postcode = postcodes)
-ua_string <- "github.com/francisbarton/myrmidon // httr2"
+ua_string <- "github.com/nhs-r-community/NHSRpopulation // httr2"
 
 # preset outputs ----------------------------------------------------------
 
@@ -45,11 +45,17 @@ check_term_out2 <- structure(
 )
 
 
-lonlat_out <- structure(list(longitude = -1.780629,
-                             latitude = 53.643909),
-                        row.names = c(NA, -1L), class = c("tbl_df",
-                                                          "tbl",
-                                                          "data.frame"))
+lonlat_out <- structure(
+  list(
+    longitude = -1.780629,
+    latitude = 53.643909
+  ),
+  row.names = c(NA, -1L), class = c(
+    "tbl_df",
+    "tbl",
+    "data.frame"
+  )
+)
 
 
 

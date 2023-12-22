@@ -19,6 +19,7 @@ Imports:
     assertthat,
     dplyr,
     httr2,
+    lubridate,
     magrittr,
     purrr,
     rlang,
@@ -27,6 +28,7 @@ Imports:
     tidyr,
     tidyselect,
     usethis,
+    utils,
     vctrs
 URL: https://github.com/nhs-r-community/NHSRpostcodetools
 BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
