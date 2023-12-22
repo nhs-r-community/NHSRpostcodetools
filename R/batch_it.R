@@ -1,4 +1,3 @@
-
 # batch_it() --------------------------------------------------------------
 
 
@@ -61,8 +60,7 @@ batch_it <- function(
     batches = NULL,
     proportion = NULL,
     maximise = FALSE,
-    quiet = TRUE
-) {
+    quiet = TRUE) {
   if (!rlang::is_interactive() | quiet) {
     cur_quiet <- getOption("usethis.quiet")
     options(usethis.quiet = TRUE)
@@ -78,7 +76,7 @@ batch_it <- function(
   }
 
   assertthat::assert_that(is.atomic(x),
-                          msg = ui_stop("This function only works with lists or vectors")
+    msg = ui_stop("This function only works with lists or vectors")
   )
 
   if (length(batches) == 1 && (length(x) <= batches)) x
@@ -111,11 +109,11 @@ batch_it <- function(
 
   # just checking
   assertthat::assert_that(is.numeric(batches),
-                          msg = ui_oops("batch_it: Batch sizes provided are not numeric")
+    msg = ui_oops("batch_it: Batch sizes provided are not numeric")
   )
 
   assertthat::assert_that(all(batches > 0),
-                          msg = ui_oops("batch_it: Batch sizes must be greater than zero")
+    msg = ui_oops("batch_it: Batch sizes must be greater than zero")
   )
 
 

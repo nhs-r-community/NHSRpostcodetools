@@ -165,11 +165,13 @@ postcode_data_join <- function(
   if (is.data.frame(.data)) {
     .data |>
       dplyr::left_join(postcode_data,
-                       by = vctrs::vec_c({{ var }} := "postcode"))
+        by = vctrs::vec_c({{ var }} := "postcode")
+      )
   } else if (rlang::is_vector(.data)) {
     tibble::tibble({{ var }} := .env$.data) |>
       dplyr::left_join(postcode_data,
-                       by = vctrs::vec_c({{ var }} := "postcode"))
+        by = vctrs::vec_c({{ var }} := "postcode")
+      )
   } else {
     postcode_data
   }
