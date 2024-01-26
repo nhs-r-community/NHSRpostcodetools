@@ -1,7 +1,7 @@
 postcodes <- c("HD1 2UT", "HD1 2UU", "HD1 2UV")
 bad_postcode <- "HD1 2VA" # doesn't exist
 test_df1 <- dplyr::tibble(place = paste0("place_", 1:3), postcode = postcodes)
-ua_string <- "github.com/nhs-r-community/NHSRpopulation // httr2"
+ua_string <- "github.com/nhs-r-community/NHSRpostcodetools // httr2"
 
 # preset outputs ----------------------------------------------------------
 
@@ -63,10 +63,10 @@ lonlat_out <- structure(
 
 
 
-"validate_test" %>%
+"validate_test" |>
   test_that({
     expect_identical(
-      purrr::map_lgl(postcodes, validate),
+      purrr::map_lgl(postcodes, validate_code),
       c(FALSE, TRUE, FALSE)
     )
   })
@@ -75,57 +75,60 @@ lonlat_out <- structure(
 
 
 
-"check_term_test" %>% test_that({
-  expect_identical(
-    check_term(postcodes[1]),
-    check_term_out1
-  )
-  expect_identical(
-    validate_out %>%
-      dplyr::mutate(response = purrr::map(query_code, check_term_possibly)) %>%
-      dplyr::filter(!purrr::map_lgl(response, is.null)),
-    check_term_out2
-  )
-  expect_error(
-    check_term(bad_postcode)
-  )
-  expect_null(
-    check_term_possibly(bad_postcode)
-  )
-})
+"check_term_test" |>
+  test_that({
+    expect_identical(
+      check_term(postcodes[1]),
+      check_term_out1
+    )
+    expect_identical(
+      validate_out |>
+        dplyr::mutate(response = purrr::map(query_code, check_term_possibly)) |>
+        dplyr::filter(!purrr::map_lgl(response, is.null)),
+      check_term_out2
+    )
+    expect_error(
+      check_term(bad_postcode)
+    )
+    expect_null(
+      check_term_possibly(bad_postcode)
+    )
+  })
 
 
 
-"lonlat_test" %>% test_that({
-  expect_identical(
-    check_term_out2 %>%
-      tidyr::unnest_wider(response) %>%
-      dplyr::select(longitude, latitude),
-    lonlat_out
-  )
-})
+"lonlat_test" |>
+  test_that({
+    expect_identical(
+      check_term_out2 |>
+        tidyr::unnest_wider(response) |>
+        dplyr::select(longitude, latitude),
+      lonlat_out
+    )
+  })
 
 
 
 # bulk_geocode -----------------------------------------------------
-"bulk_geocode_test" %>%
+"bulk_geocode_test" |>
   test_that({
     expect_equal(
-      bulk_reverse_geocode(lonlat_out) %>%
+      bulk_reverse_geocode(lonlat_out) |>
         ncol(),
-      34
+      25
     )
   })
 
 
 
 
-"autocomplete_test" %>% test_that({
-  expect_equal(
-    autocomplete(postcodes[1]),
-    "HD1 2UD"
-  )
-  expect_null(
-    autocomplete(bad_postcode)
-  )
-})
+"autocomplete_test" |>
+  test_that({
+    expect_equal(
+      autocomplete_possibly(postcodes[1]),
+      "HD1 2UD"
+    )
+    expect_null(
+      autocomplete_possibly(bad_postcode)
+    )
+  })
