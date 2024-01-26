@@ -1,0 +1,62 @@
+---
+title: "NHSRpostcodetools"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{NHSRpostcodetools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  eval = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+## Checking for valid postcodes
+
+```{r setup}
+library(NHSRpostcodetools)
+```
+
+Both vectors and tibbles can be passed through the functions. 
+Starting with a vector of postcodes with the first being terminated, the second  
+is valid and the third is invalid.
+
+### A vector of postcodes
+
+```{r}
+# a vector
+postcodes <- c("HD1 2UT", "HD1 2UU", "HD1 2UV")
+```
+
+Join this vector to the postcode data
+
+```{r}
+postcode_data_join(postcodes, fix_invalid = TRUE)
+
+```
+
+### A tibble of postcodes
+
+```{r}
+test_df1 <- dplyr::tibble(
+  place = paste0("place_", 1:3),
+  postcode = postcodes
+)
+```
+
+For a tibble or data frame the code to extract to pass through the functions in
+this package the postcode column needs to be recoded to `postcodes` in order
+to be recognised.
+
+```{r}
+postcode_data_join(test_df1, fix_invalid = TRUE)
+
+```
+

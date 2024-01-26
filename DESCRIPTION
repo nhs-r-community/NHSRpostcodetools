@@ -13,7 +13,9 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests: 
+    knitr,
     lubridate,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -31,3 +33,4 @@ Imports:
     vctrs
 URL: https://github.com/nhs-r-community/NHSRpostcodetools
 BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
+VignetteBuilder: knitr
