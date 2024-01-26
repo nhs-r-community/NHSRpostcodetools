@@ -17,10 +17,7 @@
 #' )
 #' postcode_data_join(test_df1, fix_invalid = TRUE)
 #' @export
-postcode_data_join <- function(
-    x,
-    var = "postcode",
-    fix_invalid = TRUE) {
+postcode_data_join <- function(x, var = "postcode", fix_invalid = TRUE) {
   valid_results <- NULL
   fixed_terminated_data <- NULL
   fixed_autocomp_data <- NULL
@@ -45,7 +42,7 @@ postcode_data_join <- function(
   }
 
   assertthat::assert_that(
-    length(codes) > 0,
+    length(codes) > 0L,
     msg = "No postcodes have been found."
   )
 
@@ -70,7 +67,7 @@ postcode_data_join <- function(
         purrr::map_df(check_term_possibly)
 
       # ...and find the current nearest code for the same lon/lat
-      if (nrow(terminated_codes_data) > 0) {
+      if (nrow(terminated_codes_data) > 0L) {
         fixed_term_codes_data <- terminated_codes_data |>
           dplyr::select(all_of(c("longitude", "latitude"))) |>
           bulk_reverse_geocode() |>
@@ -108,7 +105,7 @@ postcode_data_join <- function(
 
           fixed_ac_data <- ac_results |>
             purrr::list_c() |>
-            batch_it_simple(100) |>
+            batch_it_simple(100L) |>
             purrr::map_df(bulk_lookup) |>
             unnest_codes() |>
             dplyr::rename(new_postcode = "postcode")
@@ -146,7 +143,7 @@ postcode_data_join <- function(
 
   if (length(valid_codes)) {
     valid_results <- valid_codes |>
-      batch_it(100) |>
+      batch_it(100L) |>
       purrr::map_df(bulk_lookup) |>
       unnest_codes() |>
       dplyr::mutate(new_postcode = .data[["postcode"]], .after = "postcode")

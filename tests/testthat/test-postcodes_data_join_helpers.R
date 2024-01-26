@@ -1,7 +1,10 @@
 postcodes <- c("HD1 2UT", "HD1 2UU", "HD1 2UV")
 bad_postcode <- "HD1 2VA" # doesn't exist
-test_df1 <- dplyr::tibble(place = paste0("place_", 1:3), postcode = postcodes)
-ua_string <- "github.com/nhs-r-community/NHSRpostcodetools // httr2"
+test_df1 <- dplyr::tibble(
+  place = paste0("place_", seq.int(3L)),
+  postcode = postcodes
+)
+ua_string <- "github.com/nhs-r-community/NHSRpostcodetools // httr2" # nolint
 
 # preset outputs ----------------------------------------------------------
 
@@ -25,24 +28,21 @@ check_term_out1 <- list(
 )
 
 
-check_term_out2 <- structure(
-  list(
-    place = "place_1",
-    query_code = "HD1 2UT",
-    result = FALSE,
-    response = list(
-      list(
-        postcode = "HD1 2UT",
-        year_terminated = 1986L,
-        month_terminated = 12L,
-        longitude = -1.780629,
-        latitude = 53.643909
-      )
+check_term_out2 <- list(
+  place = "place_1",
+  query_code = "HD1 2UT",
+  result = FALSE,
+  response = list(
+    list(
+      postcode = "HD1 2UT",
+      year_terminated = 1986L,
+      month_terminated = 12L,
+      longitude = -1.780629,
+      latitude = 53.643909
     )
-  ),
-  class = c("tbl_df", "tbl", "data.frame"),
-  row.names = c(NA, -1L)
-)
+  )
+) |>
+  tibble::as_tibble()
 
 
 lonlat_out <- structure(
@@ -78,7 +78,7 @@ lonlat_out <- structure(
 "check_term_test" |>
   test_that({
     expect_identical(
-      check_term(postcodes[1]),
+      check_term(postcodes[[1L]]),
       check_term_out1
     )
     expect_identical(
@@ -112,10 +112,10 @@ lonlat_out <- structure(
 # bulk_geocode -----------------------------------------------------
 "bulk_geocode_test" |>
   test_that({
-    expect_equal(
+    expect_identical(
       bulk_reverse_geocode(lonlat_out) |>
         ncol(),
-      25
+      25L
     )
   })
 
@@ -124,8 +124,8 @@ lonlat_out <- structure(
 
 "autocomplete_test" |>
   test_that({
-    expect_equal(
-      autocomplete_possibly(postcodes[1]),
+    expect_identical(
+      autocomplete_possibly(postcodes[[1L]]),
       "HD1 2UD"
     )
     expect_null(
