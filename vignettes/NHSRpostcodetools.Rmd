@@ -60,3 +60,17 @@ postcode_data_join(test_df1, fix_invalid = TRUE)
 
 ```
 
+Note that the parameter `fix_invalid = TRUE` defaults to TRUE:
+
+```{r}
+postcode_data_join(test_df1)
+
+```
+
+And if it is set to FALSE the same message appears but the `new_postcode` is not
+populated and has `NA`.
+
+```{r}
+postcode_data_join(test_df1, fix_invalid = FALSE)
+
+```
