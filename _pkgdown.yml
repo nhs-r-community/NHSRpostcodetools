@@ -1,0 +1,8 @@
+url: ~
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, articles, news]
+    right: [search, reference]
