@@ -1,6 +1,6 @@
 #' Use postcodes.io to get postcode data
 #'
-#' @param .data A data frame with a column of postcodes, or a vector
+#' @param x A data frame with a column of postcodes, or a vector
 #'  of postcodes.
 #' @param var String or symbol. The name of the variable in the data frame that
 #'  comprises the postcodes to be submitted. Should be acceptable as a symbol
@@ -18,7 +18,7 @@
 #' postcode_data_join(test_df1, fix_invalid = TRUE)
 #' @export
 postcode_data_join <- function(
-    .data,
+    x,
     var = "postcode",
     fix_invalid = TRUE) {
   valid_results <- NULL
@@ -30,18 +30,18 @@ postcode_data_join <- function(
 
   var <- rlang::as_string(var)
 
-  if (is.data.frame(.data)) {
+  if (is.data.frame(x)) {
     assertthat::assert_that(
-      var %in% names(.data),
+      var %in% names(x),
       msg = "That variable doesn't seem to exist in this data frame."
     )
 
-    codes <- .data |>
-      dplyr::pull(var) |>
+    codes <- x |>
+      dplyr::pull({{ var }}) |>
       unique()
   } else {
-    assertthat::assert_that(rlang::is_vector(.data))
-    codes <- unique(.data)
+    assertthat::assert_that(rlang::is_vector(x))
+    codes <- unique(x)
   }
 
   assertthat::assert_that(
@@ -56,9 +56,9 @@ postcode_data_join <- function(
   invalid_codes <- setdiff(codes, valid_codes)
 
 
-  ##### If we have some invalid codes then try to fix them
-  # by, firstly, seeing if they are terminated codes, finding the lon/lat and
-  # then reverse geocoding the lon/lat to get the current code;
+  # If we have some invalid codes then try to fix them by, firstly, seeing if
+  # they are terminated codes, finding the lon/lat and then reverse geocoding
+  # the lon/lat to get the current code;
   # then if that fails, returning a nearby code using the autocomplete feature
   # (assuming that codes with only single final character different are
   # geographically near each other - I think this is sound).
@@ -82,13 +82,13 @@ postcode_data_join <- function(
           dplyr::select("postcode") |>
           dplyr::bind_cols(fixed_term_codes_data)
 
-        terminated_codes <- terminated_codes_data$postcode
+        terminated_codes <- terminated_codes_data[["postcode"]]
 
         usethis::ui_info(paste0(
           "The following postcodes are terminated:\n",
-          fixed_terminated_data$postcode,
+          fixed_terminated_data[["postcode"]],
           "\nand have been replaced with these current postcodes:\n",
-          fixed_terminated_data$new_postcode
+          fixed_terminated_data[["new_postcode"]]
         ))
       }
 
@@ -123,7 +123,7 @@ postcode_data_join <- function(
             "The following postcodes are invalid:\n",
             autocomp_codes,
             "\nand have been replaced with these nearby postcodes:\n",
-            fixed_ac_data$new_postcode
+            fixed_ac_data[["new_postcode"]]
           ))
         } else {
           autocomp_codes <- NULL
@@ -149,7 +149,7 @@ postcode_data_join <- function(
       batch_it(100) |>
       purrr::map_df(bulk_lookup) |>
       unnest_codes() |>
-      dplyr::mutate(new_postcode = postcode, .after = postcode)
+      dplyr::mutate(new_postcode = .data[["postcode"]], .after = "postcode")
   }
 
   postcode_data <- dplyr::bind_rows(
@@ -162,13 +162,13 @@ postcode_data_join <- function(
   ) |>
     dplyr::relocate("result_type", .after = "new_postcode")
 
-  if (is.data.frame(.data)) {
-    .data |>
+  if (is.data.frame(x)) {
+    x |>
       dplyr::left_join(postcode_data,
         by = vctrs::vec_c({{ var }} := "postcode")
       )
-  } else if (rlang::is_vector(.data)) {
-    tibble::tibble({{ var }} := .env$.data) |>
+  } else if (rlang::is_vector(x)) {
+    tibble::tibble({{ var }} := x) |>
       dplyr::left_join(postcode_data,
         by = vctrs::vec_c({{ var }} := "postcode")
       )
