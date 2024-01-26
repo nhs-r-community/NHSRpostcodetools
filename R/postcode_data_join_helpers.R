@@ -1,5 +1,5 @@
 req_base <- function(x = "") {
-  ua <- "github.com/nhs-r-community/NHSRpopulation // httr2"
+  ua <- "github.com/nhs-r-community/NHSRpopulation // httr2" # nolint
 
   paste0("https://api.postcodes.io/", x, "postcodes/") |>
     httr2::request() |>
@@ -39,7 +39,7 @@ check_term_possibly <- purrr::possibly(check_term, otherwise = NULL)
 bulk_reverse_geocode <- function(.data) {
   req_base() |>
     httr2::req_body_json(list(geolocations = .data)) |>
-    httr2::req_url_query(limit = 1) |>
+    httr2::req_url_query(limit = 1L) |>
     pluck_result() |>
     purrr::map_df("result")
 }
@@ -70,10 +70,10 @@ autocomplete <- function(x) {
   req_base() |>
     httr2::req_url_path_append(x) |>
     httr2::req_url_path_append("/autocomplete") |>
-    httr2::req_url_query(limit = 1) |>
+    httr2::req_url_query(limit = 1L) |>
     pluck_result() |>
     unlist() |>
-    sample(1)
+    sample(1L)
 }
 autocomplete_possibly <- purrr::possibly(autocomplete, otherwise = NULL)
 

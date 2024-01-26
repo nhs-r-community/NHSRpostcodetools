@@ -42,17 +42,15 @@ All the elements of \code{x} batched into a list.
 \description{
 Batch up a long vector, or list of vectors. For example so they can be
 passed via a \code{map} function to services with length-limited APIs.
-
-\emph{Go \code{batch_it()} crazy!}
 }
 \examples{
-batch_it(seq(2, 60, 2), 6)
-batch_it(seq(2, 60, 2), proportion = 0.2)
+batch_it(seq(2L, 60L, 2L), 6L)
+batch_it(seq(2L, 60L, 2L), proportion = 0.2)
 
-batch_it(1:100, batches = c(20, 30, 50))
-batch_it(letters, batches = c(4, 6))
-batch_it(letters, batches = c(4, 6), maximise = TRUE)
-batch_it(letters, proportion = c(4, 6))
+batch_it(1:100, batches = c(20L, 30L, 50L))
+batch_it(letters, batches = c(4L, 6L))
+batch_it(letters, batches = c(4L, 6L), maximise = TRUE)
+batch_it(letters, proportion = c(4L, 6L))
 
 # ----
 as_year <- function(x) {
@@ -65,10 +63,10 @@ month_lengths <- function(year) {
   lubridate::as_date(paste0(year, "-", 1:12, "-01")) |>
     lubridate::days_in_month()
 }
-batch_it(x = as_year(2022), batches = month_lengths(2022))
+batch_it(x = as_year(2022L), batches = month_lengths(2022L))
 
 # ----
-batch_it_simple(letters, 6)
+batch_it_simple(letters, 6L)
 batch_it_simple(letters, 0.45)
 
 }
