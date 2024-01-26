@@ -2,6 +2,9 @@
 # NHSRpostcodetools
 
 <!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 This is a package of useful functions related to working with Postcodes within 
@@ -11,13 +14,17 @@ maintained by the ONS (Office of National Statistics).
 
 ## Installation
 
-You can install the development version of {NHSRpostcodetools} from 
-[GitHub](https://github.com/) with:
+You can install the development version of `NHSRpostcodetools` from 
+[GitHub](https://github.com/nhs-r-community/NHSRpostcodetools) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("nhs-r-community/NHSRpostcodetools")
 ```
+
+To find out more about the functions there is a vignette for [Getting
+Started](https://nhs-r-community.github.io/NHSRpostcodetools/articles/intro.html)
+
 ## Contributing
 
 Please see our 
