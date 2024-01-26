@@ -4,10 +4,10 @@
 \alias{postcode_data_join}
 \title{Use postcodes.io to get postcode data}
 \usage{
-postcode_data_join(.data, var = "postcode", fix_invalid = TRUE)
+postcode_data_join(x, var = "postcode", fix_invalid = TRUE)
 }
 \arguments{
-\item{.data}{A data frame with a column of postcodes, or a vector
+\item{x}{A data frame with a column of postcodes, or a vector
 of postcodes.}
 
 \item{var}{String or symbol. The name of the variable in the data frame that
