@@ -105,7 +105,7 @@ postcode_data_join <- function(x, var = "postcode", fix_invalid = TRUE) {
 
           fixed_ac_data <- ac_results |>
             purrr::list_c() |>
-            batch_it_simple(100L) |>
+            batch_it(100L) |>
             purrr::map_df(bulk_lookup) |>
             unnest_codes() |>
             dplyr::rename(new_postcode = "postcode")

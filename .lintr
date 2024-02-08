@@ -1,2 +1,5 @@
 linters: all_linters()
+exclusions: list(
+  "vignettes"
+  )
 encoding: "UTF-8"

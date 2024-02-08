@@ -2,75 +2,22 @@
 % Please edit documentation in R/batch_it.R
 \name{batch_it}
 \alias{batch_it}
-\alias{batch_it_simple}
-\title{Convert a list or vector to a batched list of its elements}
+\title{Batch a vector or list into a list of elements with a maximum size}
 \usage{
-batch_it(x, batches = NULL, proportion = NULL, maximise = FALSE, quiet = TRUE)
-
-batch_it_simple(x, batch_size)
+batch_it(x, batch_size)
 }
 \arguments{
-\item{x}{a vector, or a list flattenable to a vector}
-
-\item{batches}{numeric. The size (length) of batches to create. Can be a
-single value or multiple values (see Examples). Should be a whole,
-positive number, if provided, else \code{NULL}.}
-
-\item{proportion}{numeric. Proportional sizes of batches to be created.
-For example \code{c(4, 6)} will create two batches of approximately 40\% and
-60\% of the length of the target vector (\code{x}). When multiple
-\code{proportion} values are provided, these are not repeated.
-A single proportion less than 1 is repeated as many times as possible to
-get near to the length of the target vector. For example, a \code{proportion}
-of 0.1 will be treated as a tenth, and batch sizes will be rounded to
-an integer size nearest to a tenth of the length of \code{x}.}
-
-\item{maximise}{Boolean, \code{FALSE} by default. If \code{TRUE}, a vector of batch
-sizes will be partially repeated to fit maximally to the length
-of the target vector. See examples below.}
-
-\item{quiet}{Boolean, \code{TRUE} by default. Whether to show informative
-\verb{ui_*} messages from \code{{usethis}}.}
+\item{x}{A vector or list}
 
 \item{batch_size}{numeric. The size (length) of batches to create. Should be
-a single value (see Examples). If supplied as a decimal (<1), it will be
-interpreted as a proportion of \code{length(x)}.}
-}
-\value{
-All the elements of \code{x} batched into a list.
+a single positive integer value (see Examples).}
 }
 \description{
-Batch up a long vector, or list of vectors. For example so they can be
-passed via a \code{map} function to services with length-limited APIs.
+Batch a vector or list into a list of elements with a maximum size
 }
 \examples{
-batch_it(seq(2L, 60L, 2L), 6L)
-batch_it(seq(2L, 60L, 2L), proportion = 0.2)
-
-batch_it(1:100, batches = c(20L, 30L, 50L))
-batch_it(letters, batches = c(4L, 6L))
-batch_it(letters, batches = c(4L, 6L), maximise = TRUE)
-batch_it(letters, proportion = c(4L, 6L))
-
 # ----
-as_year <- function(x) {
-  lubridate::as_date(
-    lubridate::ymd(paste0(x, "-01-01")):
-    lubridate::ymd(paste0(x, "-12-31"))
-  )
-}
-month_lengths <- function(year) {
-  lubridate::as_date(paste0(year, "-", 1:12, "-01")) |>
-    lubridate::days_in_month()
-}
-batch_it(x = as_year(2022L), batches = month_lengths(2022L))
+batch_it(letters, 6L)
+batch_it(letters, 27L)
 
-# ----
-batch_it_simple(letters, 6L)
-batch_it_simple(letters, 0.45)
-
-}
-\seealso{
-\code{\link[=batch_it_simple]{batch_it_simple()}} which does the same thing but has fewer options
-and works just fine for simpler cases.
 }

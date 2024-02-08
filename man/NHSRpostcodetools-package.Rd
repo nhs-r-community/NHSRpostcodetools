@@ -21,7 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Fran Barton \email{fbarton@alwaysdata.net}
+  \item Fran Barton \email{fbarton@alwaysdata.net} (\href{https://orcid.org/0000-0002-5650-1176}{ORCID})
 }
 
 Other contributors:
