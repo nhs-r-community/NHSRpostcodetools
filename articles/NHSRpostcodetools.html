@@ -50,6 +50,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/nhs-r-community/NHSRpostcodetools/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 
@@ -97,19 +103,19 @@ is valid and the third is invalid.</p>
 <span><span class="co">#&gt;   HD1 2UV</span></span>
 <span><span class="co">#&gt;   and have been replaced with these nearby postcodes:</span></span>
 <span><span class="co">#&gt;   HD1 2UD</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 38</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 40</span></span></span>
 <span><span class="co">#&gt;   postcode new_postcode result_type   quality eastings northings country nhs_ha </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> HD1 2UT  HD1 2RD      terminated          1   <span style="text-decoration: underline;">414</span>639    <span style="text-decoration: underline;">416</span>430 England Yorksh…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> HD1 2UU  HD1 2UU      valid               1   <span style="text-decoration: underline;">414</span>433    <span style="text-decoration: underline;">416</span>422 England Yorksh…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> HD1 2UV  HD1 2UD      autocompleted       1   <span style="text-decoration: underline;">414</span>371    <span style="text-decoration: underline;">416</span>317 England Yorksh…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32 more variables: longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   european_electoral_region &lt;chr&gt;, primary_care_trust &lt;chr&gt;, region &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   lsoa &lt;chr&gt;, msoa &lt;chr&gt;, incode &lt;chr&gt;, outcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, admin_district &lt;chr&gt;, parish &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date_of_introduction &lt;chr&gt;, admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pfa &lt;chr&gt;, admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward_code &lt;chr&gt;, parish_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, parliamentary_constituency_2024 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district &lt;chr&gt;, parish &lt;chr&gt;, date_of_introduction &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;, pfa &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="a-tibble-of-postcodes">A tibble of postcodes<a class="anchor" aria-label="anchor" href="#a-tibble-of-postcodes"></a>
@@ -132,19 +138,19 @@ functions in this package the postcode column needs to be recoded to
 <span><span class="co">#&gt;   HD1 2UV</span></span>
 <span><span class="co">#&gt;   and have been replaced with these nearby postcodes:</span></span>
 <span><span class="co">#&gt;   HD1 2UD</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 39</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 41</span></span></span>
 <span><span class="co">#&gt;   place   postcode new_postcode result_type   quality eastings northings country</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> place_1 HD1 2UT  HD1 2RD      terminated          1   <span style="text-decoration: underline;">414</span>639    <span style="text-decoration: underline;">416</span>430 England</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> place_2 HD1 2UU  HD1 2UU      valid               1   <span style="text-decoration: underline;">414</span>433    <span style="text-decoration: underline;">416</span>422 England</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> place_3 HD1 2UV  HD1 2UD      autocompleted       1   <span style="text-decoration: underline;">414</span>371    <span style="text-decoration: underline;">416</span>317 England</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   european_electoral_region &lt;chr&gt;, primary_care_trust &lt;chr&gt;, region &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   lsoa &lt;chr&gt;, msoa &lt;chr&gt;, incode &lt;chr&gt;, outcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, admin_district &lt;chr&gt;, parish &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date_of_introduction &lt;chr&gt;, admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pfa &lt;chr&gt;, admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward_code &lt;chr&gt;, parish_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, parliamentary_constituency_2024 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district &lt;chr&gt;, parish &lt;chr&gt;, date_of_introduction &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;, pfa &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p>Note that the parameter <code>fix_invalid = TRUE</code> defaults to
 TRUE:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -157,19 +163,19 @@ TRUE:</p>
 <span><span class="co">#&gt;   HD1 2UV</span></span>
 <span><span class="co">#&gt;   and have been replaced with these nearby postcodes:</span></span>
 <span><span class="co">#&gt;   HD1 2UD</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 39</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 41</span></span></span>
 <span><span class="co">#&gt;   place   postcode new_postcode result_type   quality eastings northings country</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> place_1 HD1 2UT  HD1 2RD      terminated          1   <span style="text-decoration: underline;">414</span>639    <span style="text-decoration: underline;">416</span>430 England</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> place_2 HD1 2UU  HD1 2UU      valid               1   <span style="text-decoration: underline;">414</span>433    <span style="text-decoration: underline;">416</span>422 England</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> place_3 HD1 2UV  HD1 2UD      autocompleted       1   <span style="text-decoration: underline;">414</span>371    <span style="text-decoration: underline;">416</span>317 England</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   european_electoral_region &lt;chr&gt;, primary_care_trust &lt;chr&gt;, region &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   lsoa &lt;chr&gt;, msoa &lt;chr&gt;, incode &lt;chr&gt;, outcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, admin_district &lt;chr&gt;, parish &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date_of_introduction &lt;chr&gt;, admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pfa &lt;chr&gt;, admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward_code &lt;chr&gt;, parish_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, parliamentary_constituency_2024 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district &lt;chr&gt;, parish &lt;chr&gt;, date_of_introduction &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;, pfa &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p>And if it is set to FALSE the same message appears but the
 <code>new_postcode</code> is not populated and has <code>NA</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -180,19 +186,19 @@ TRUE:</p>
 <span><span class="co">#&gt;   The following postcodes are invalid:</span></span>
 <span><span class="co">#&gt;   HD1 2UV</span></span>
 <span><span class="co">#&gt;   but have not been successfully replaced with valid codes.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 39</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 41</span></span></span>
 <span><span class="co">#&gt;   place   postcode new_postcode result_type quality eastings northings country</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> place_1 HD1 2UT  <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> place_2 HD1 2UU  HD1 2UU      valid             1   <span style="text-decoration: underline;">414</span>433    <span style="text-decoration: underline;">416</span>422 England</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> place_3 HD1 2UV  <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33 more variables: nhs_ha &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   european_electoral_region &lt;chr&gt;, primary_care_trust &lt;chr&gt;, region &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   lsoa &lt;chr&gt;, msoa &lt;chr&gt;, incode &lt;chr&gt;, outcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, admin_district &lt;chr&gt;, parish &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date_of_introduction &lt;chr&gt;, admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pfa &lt;chr&gt;, admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward_code &lt;chr&gt;, parish_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   parliamentary_constituency &lt;chr&gt;, parliamentary_constituency_2024 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district &lt;chr&gt;, parish &lt;chr&gt;, date_of_introduction &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_ward &lt;chr&gt;, ccg &lt;chr&gt;, nuts &lt;chr&gt;, pfa &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   admin_district_code &lt;chr&gt;, admin_county_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
