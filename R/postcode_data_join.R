@@ -25,6 +25,9 @@ postcode_data_join <- function(x, var = "postcode", fix_invalid = TRUE) {
   autocomp_codes <- NULL
   remainder <- NULL
 
+# is_character (vector) ------------------------------------------------------
+
+
   var <- rlang::as_string(var)
 
   if (is.data.frame(x)) {
@@ -37,7 +40,7 @@ postcode_data_join <- function(x, var = "postcode", fix_invalid = TRUE) {
       dplyr::pull({{ var }}) |>
       unique()
   } else {
-    assertthat::assert_that(rlang::is_vector(x))
+    assertthat::assert_that(rlang::is_character(x))
     codes <- unique(x)
   }
 
@@ -164,7 +167,7 @@ postcode_data_join <- function(x, var = "postcode", fix_invalid = TRUE) {
       dplyr::left_join(postcode_data,
         by = vctrs::vec_c({{ var }} := "postcode")
       )
-  } else if (rlang::is_vector(x)) {
+  } else if (rlang::is_character(x)) {
     tibble::tibble({{ var }} := x) |>
       dplyr::left_join(postcode_data,
         by = vctrs::vec_c({{ var }} := "postcode")
