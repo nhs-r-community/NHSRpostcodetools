@@ -1,8 +1,19 @@
-url: ~
+url: https://nhs-r-community.github.io/NHSRpostcodetools/
 template:
   bootstrap: 5
-
 navbar:
   structure:
-    left:  [intro, articles, news]
-    right: [search, reference]
+    left:
+    - intro
+    - articles
+    - news
+    right:
+    - search
+    - reference
+    - github
+
+authors:
+  footer:
+    roles: [aut]
+  sidebar:
+    roles: [aut]
