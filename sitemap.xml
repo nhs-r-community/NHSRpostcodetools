@@ -1,42 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/404.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/articles/NHSRpostcodetools.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/NHSRpostcodetools-package.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/batch_it.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/postcode_data_join.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/404.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/LICENSE-text.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/LICENSE.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/articles/NHSRpostcodetools.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/articles/index.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/authors.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/index.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/news/index.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/NHSRpostcodetools-package.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/batch_it.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/index.html</loc></url>
+<url><loc>https://nhs-r-community.github.io/NHSRpostcodetools/reference/postcode_data_join.html</loc></url>
 </urlset>
+
