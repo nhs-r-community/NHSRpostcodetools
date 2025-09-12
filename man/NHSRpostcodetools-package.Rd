@@ -4,13 +4,14 @@
 \name{NHSRpostcodetools-package}
 \alias{NHSRpostcodetools}
 \alias{NHSRpostcodetools-package}
-\title{NHSRpostcodetools: Package to work with England Postcodes in R}
+\title{NHSRpostcodetools: Get data for UK postcodes}
 \description{
-Functions related to England Postcodes and geographical areas.
+Extracts data from the postcodes.io API for a given UK postcode, such as its LSOA (or equivalent), parliamentary constituency, and spatial coordinates. It can also check a list of postcodes for currency/validity and suggest a replacement current postcode for an expired code.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://nhs-r-community.github.io/NHSRpostcodetools/}
   \item \url{https://github.com/nhs-r-community/NHSRpostcodetools}
   \item Report bugs at \url{https://github.com/nhs-r-community/NHSRpostcodetools/issues}
 }
@@ -21,7 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Fran Barton \email{fbarton@alwaysdata.net} (\href{https://orcid.org/0000-0002-5650-1176}{ORCID})
+  \item Fran Barton \email{francis.barton@nhs.net} (\href{https://orcid.org/0000-0002-5650-1176}{ORCID})
 }
 
 Other contributors:
