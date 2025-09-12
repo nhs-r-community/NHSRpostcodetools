@@ -1,6 +1,6 @@
 Package: NHSRpostcodetools
-Title: Package to work with England Postcodes in R
-Version: 0.0.0.9001
+Title: Get data for UK postcodes
+Version: 0.0.9
 Authors@R:
     c(
         person(
@@ -8,7 +8,7 @@ Authors@R:
             comment = c(ORCID = "0000-0003-1033-9158")
         ),
         person(
-            "Fran", "Barton", , "fbarton@alwaysdata.net", "aut",
+            "Fran", "Barton", , "francis.barton@nhs.net", "aut",
             comment = c(ORCID = "0000-0002-5650-1176")
         ),
         person(
@@ -16,20 +16,19 @@ Authors@R:
         )
     )
 Maintainer: Zoë Turner <zoe.turner3@nhs.net>
-Description: Functions related to England Postcodes and geographical areas.
+Description: Extracts data from the postcodes.io API for a given UK postcode,
+    such as its LSOA (or equivalent), parliamentary constituency, and spatial
+    coordinates. It can also check a list of postcodes for currency/validity
+    and suggest a replacement current postcode for an expired code.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
-Depends: 
-    R (>= 4.1.0)
-Suggests: 
-    knitr,
-    lubridate,
-    rmarkdown,
-    testthat (>= 3.0.0)
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
-Imports: 
+VignetteBuilder: knitr
+Depends:
+    R (>= 4.1.0)
+Imports:
     assertthat,
     dplyr (>= 1.1.0),
     httr2 (>= 1.0.0),
@@ -42,6 +41,11 @@ Imports:
     usethis,
     utils,
     vctrs
-URL: https://github.com/nhs-r-community/NHSRpostcodetools
+Suggests:
+    knitr,
+    lubridate,
+    rmarkdown,
+    testthat (>= 3.0.0)
+URL: https://nhs-r-community.github.io/NHSRpostcodetools/,
+    https://github.com/nhs-r-community/NHSRpostcodetools
 BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
-VignetteBuilder: knitr
