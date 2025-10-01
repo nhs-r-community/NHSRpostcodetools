@@ -19,7 +19,7 @@ pluck_result <- function(req) {
 
 validate_code <- function(x) {
   req_base() |>
-    httr2::req_url_path_append(URLencode(x)) |>
+    httr2::req_url_path_append(x) |>
     httr2::req_url_path_append("/validate") |>
     pluck_result()
 }
@@ -28,7 +28,7 @@ validate_code <- function(x) {
 
 check_term <- function(x) {
   req_base("terminated_") |>
-    httr2::req_url_path_append(URLencode(x)) |>
+    httr2::req_url_path_append(x) |>
     pluck_result()
 }
 check_term_possibly <- purrr::possibly(check_term, otherwise = NULL)
@@ -65,8 +65,7 @@ unnest_codes <- function(.data) {
 autocomplete <- function(x) {
   # Create incomplete postcode: If x ends in two letters, keep only the first
   # one. If x ends in a single letter (i.e. already incomplete), still keep it.
-  x <- stringr::str_replace(x, "([:alpha:]?)([:alpha:]?)$", "\\1") |>
-    URLencode()
+  x <- stringr::str_replace(x, "([:alpha:]?)([:alpha:]?)$", "\\1")
   req_base() |>
     httr2::req_url_path_append(x) |>
     httr2::req_url_path_append("/autocomplete") |>
