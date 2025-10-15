@@ -1,5 +1,5 @@
 Package: NHSRpostcodetools
-Title: Get data for UK postcodes
+Title: Get geographic and administrative data about UK postcodes
 Version: 0.0.9
 Authors@R:
     c(
@@ -22,29 +22,24 @@ Description: Extracts data from the postcodes.io API for a given UK postcode,
     and suggest a replacement current postcode for an expired code.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Depends:
-    R (>= 4.1.0)
+    R (>= 4.4.0)
 Imports:
     assertthat,
+    cli,
     dplyr (>= 1.1.0),
     httr2 (>= 1.0.0),
     purrr (>= 1.0.0),
     rlang,
-    stringr,
     tibble,
     tidyr,
     tidyselect,
-    usethis,
-    utils,
-    vctrs
+    utils
 Suggests:
-    knitr,
-    lubridate,
-    rmarkdown,
     testthat (>= 3.0.0)
 URL: https://nhs-r-community.github.io/NHSRpostcodetools/,
     https://github.com/nhs-r-community/NHSRpostcodetools
