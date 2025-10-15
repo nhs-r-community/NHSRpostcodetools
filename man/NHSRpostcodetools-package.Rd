@@ -4,7 +4,7 @@
 \name{NHSRpostcodetools-package}
 \alias{NHSRpostcodetools}
 \alias{NHSRpostcodetools-package}
-\title{NHSRpostcodetools: Get data for UK postcodes}
+\title{NHSRpostcodetools: Get geographic and administrative data about UK postcodes}
 \description{
 Extracts data from the postcodes.io API for a given UK postcode, such as its LSOA (or equivalent), parliamentary constituency, and spatial coordinates. It can also check a list of postcodes for currency/validity and suggest a replacement current postcode for an expired code.
 }
