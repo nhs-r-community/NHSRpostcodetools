@@ -18,14 +18,14 @@
 #' @export
 get_postcode_data <- function(x, as_list = FALSE, include_codes = TRUE) {
   x <- unique(toupper(purrr::discard(x, is.na)))
-  assertthat::assert_that(length(x) > 0, msg = "No postcodes have been found.")
+  assertthat::assert_that(length(x) > 0L, msg = "No postcodes have been found.")
 
   valid_index <- purrr::map_lgl(x, validate_code, .progress = "Checking codes")
   valid_codes <- x[valid_index]
   invalid_codes <- x[!valid_index]
 
   if (length(invalid_codes) > 0L) {
-    inv <- cli::cli_vec(invalid_codes, list(`vec-trunc` = 5))
+    inv <- cli::cli_vec(invalid_codes, list(`vec-trunc` = 5L)) # nolint
     paste0(
       "{.fn get_postcode_data} found {length(invalid_codes)} invalid ",
       "postcode{?s}. Example{?s}: {.val {inv}}. You can use ",
@@ -64,7 +64,7 @@ get_postcode_data <- function(x, as_list = FALSE, include_codes = TRUE) {
 #'
 #' @examples
 #' tibble::tibble(
-#'   place = paste0("place_", 1:3),
+#'   place = paste0("place_", seq(3L)),
 #'   postcode = c("NP22 3PS", "NP22 4PS", "NP22 5PS")
 #' ) |>
 #'   postcode_data_join()
@@ -78,17 +78,15 @@ postcode_data_join <- function(tbl, .col = "postcode", include_codes = TRUE) {
   dplyr::left_join(tbl, api_data, by = dplyr::join_by({{ .col }} == "postcode"))
 }
 
-
-#' Unnest codes (wider): from a list-col to a column each
-#' @param tbl A data frame with ONS (etc.) codes data in a list-col
-#' @keywords internal
-unnest_codes <- function(tbl) {
-  tbl |>
-    dplyr::mutate(codes_names = names(.data[["codes"]])) |>
-    dplyr::mutate(dplyr::across("codes", unlist)) |>
-    tidyr::pivot_wider(
-      names_from = "codes_names",
-      names_glue = "{codes_names}_code",
-      values_from = "codes"
-    )
+tibblise_results_list <- function(results_list) {
+  results_list |>
+    purrr::map("result") |>
+    purrr::list_flatten() |>
+    purrr::map("result") |>
+    purrr::map(purrr::compact) |>
+    # If result contains nested codes then flatten these out and rename.
+    # Hopefully this doesn't break things if codes are not included!
+    purrr::map(\(x) purrr::list_flatten(x, name_spec = "{inner}_code")) |>
+    purrr::map(tibble::as_tibble_row) |>
+    purrr::list_rbind()
 }

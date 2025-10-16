@@ -2,7 +2,7 @@
 % Please edit documentation in R/suggest_fixes.R
 \name{suggest_fixes}
 \alias{suggest_fixes}
-\title{Return data for suggested replacements for invalid postcodes}
+\title{Return a table with suggested replacements for invalid postcodes}
 \usage{
 suggest_fixes(codes)
 }
@@ -22,5 +22,5 @@ be replaced using the two methods above.
 Any valid codes will be excluded from the returned data frame.
 }
 \examples{
-suggest_fixes(c("hd1 2ut", "hd1 2uu", "hd1 2uv"))
+suggest_fixes(c("NP22 3PQ", "NP22 3PR", "NP22 3MN"))
 }
