@@ -1,4 +1,4 @@
-linters: all_linters()
+linters: linters_with_defaults()
 exclusions: list(
   "vignettes"
   )

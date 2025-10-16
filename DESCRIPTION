@@ -16,10 +16,10 @@ Authors@R:
         )
     )
 Maintainer: Zoë Turner <zoe.turner3@nhs.net>
-Description: Extracts data from the postcodes.io API for a given UK postcode,
-    such as its LSOA (or equivalent), parliamentary constituency, and spatial
-    coordinates. It can also check a list of postcodes for currency/validity
-    and suggest a replacement current postcode for an expired code.
+Description: Extracts data from the postcodes.io API for collections of UK
+    postcodes, such as their LSOA (or equivalent), parliamentary constituency,
+    and spatial coordinates. It can also check postcodes for currency/validity
+    and suggest replacement current postcodes for terminated codes.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.3.2
@@ -37,7 +37,6 @@ Imports:
     rlang,
     tibble,
     tidyr,
-    tidyselect,
     utils
 Suggests:
     testthat (>= 3.0.0)
