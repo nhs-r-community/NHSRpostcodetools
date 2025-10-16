@@ -8,7 +8,7 @@ test_that("core request function works", {
     httr2::req_user_agent("github.com/nhs-r-community // httr2") |>
     httr2::req_url_path_append(x)
   expect_s3_class(req2, "httr2_request")
-  expect_equal(req2[["url"]], "https://api.postcodes.io/postcodes")
+  expect_identical(req2[["url"]], "https://api.postcodes.io/postcodes")
 })
 
 
@@ -47,7 +47,7 @@ test_that("check terminated function works", {
   out3 <- check_terminated_possibly(pc3) |>
     expect_no_error()
   expect_true(rlang::is_list(out1))
-  expect_length(out1, 5)
+  expect_length(out1, 5L)
   expect_null(out2)
   expect_null(out3)
 })
@@ -55,8 +55,8 @@ test_that("check terminated function works", {
 
 test_that("incomplete postcodes logic", {
   to_incomplete <- \(x) sub("([0-9])([[:alpha:]])[[:alpha:]]?$", "\\1\\2", x)
-  expect_equal(to_incomplete("NP22 3PS"), "NP22 3P")
-  expect_equal(to_incomplete("NP22 3P"), "NP22 3P")
+  expect_identical(to_incomplete("NP22 3PS"), "NP22 3P")
+  expect_identical(to_incomplete("NP22 3P"), "NP22 3P")
 
   code <- "NP22 3P"
   out <- base_request() |>
@@ -65,10 +65,10 @@ test_that("incomplete postcodes logic", {
     pluck_result() |>
     expect_no_error()
   expect_true(rlang::is_list(out))
-  set.seed(4567)
+  set.seed(4567L)
   out2 <- autocomplete_possibly(code)
-  expect_equal(out2, "NP22 3PD")
+  expect_identical(out2, "NP22 3PD")
   out3 <- autocomplete_possibly("NP22 3M") |> # no postcodes exist
     expect_no_error()
-  expect_null(out3)
+  expect_true(is.na(out3))
 })

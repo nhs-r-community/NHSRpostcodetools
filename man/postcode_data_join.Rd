@@ -23,7 +23,7 @@ Look up data for postcodes from a data frame column and join the results on
 }
 \examples{
 tibble::tibble(
-  place = paste0("place_", 1:3),
+  place = paste0("place_", seq(3L)),
   postcode = c("NP22 3PS", "NP22 4PS", "NP22 5PS")
 ) |>
   postcode_data_join()
