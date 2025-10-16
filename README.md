@@ -3,12 +3,12 @@
 
 <!-- badges: start -->
 
-![MIT License][gh_licence]
+[![MIT License][licence_badge]](LICENCE.md)
 [![Project Status: Active – The project has reached a stable, usable state and
 is being actively developed][repostatus_svg]][repostatus_info]
-![GitHub R package version][gh_ver]
+[![GitHub R package version][gh_ver]](DESCRIPTION)
 
-[gh_licence]: https://img.shields.io/badge/licence-MIT-blue?style=plastic
+[licence_badge]: https://img.shields.io/badge/licence-MIT-blue
 [repostatus_info]: https://www.repostatus.org/#active
 [repostatus_svg]: https://www.repostatus.org/badges/latest/active.svg
 [gh_ver]: https://img.shields.io/github/r-package/v/nhs-r-community/NHSRpostcodetools
