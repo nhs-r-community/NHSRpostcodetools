@@ -4,7 +4,7 @@
 \alias{get_postcode_data}
 \title{Use postcodes.io to get postcode data}
 \usage{
-get_postcode_data(x, as_list = FALSE, include_codes = TRUE)
+get_postcode_data(x, as_list = FALSE, filter = filter_fields())
 }
 \arguments{
 \item{x}{A vector of postcodes}
@@ -13,11 +13,15 @@ get_postcode_data(x, as_list = FALSE, include_codes = TRUE)
 extract the data from the list and return it as a tibble. If set \code{TRUE},
 an unprocessed list of the JSON data from the API will be returned instead}
 
-\item{include_codes}{boolean, default \code{TRUE}. Include columns for the ONS
-administrative codes for geographic units in the returned tibble. Irrelevant
-if \code{as_list} is \code{TRUE}; in this case all ONS codes are included as a
-nested list in the list data for each postcode.
-See \url{https://postcodes.io/docs/postcode/lookup} for details}
+\item{filter}{character vector or helper function. The default is
+\link{filter_fields}, which by default evaluates to \code{NULL}, which means no
+fields will be filtered out from the returned data. You can also use
+\link{filter_fields} to validate a vector of field names that you supply - see
+Examples below.
+The full list of field names is available in the \link{schema_table} data. Some
+other helper functions are provided for common scenarios: \link{exclude_codes}
+and \link{minimal_fields}.
+See \url{https://postcodes.io/docs/postcode/bulk} for details.}
 }
 \value{
 A tibble by default, otherwise a list if \code{as_list} is TRUE
@@ -27,5 +31,16 @@ See \url{https://postcodes.io/docs/postcode/lookup} for details of the data
 that the API returns
 }
 \examples{
-get_postcode_data(c("NP22 3PS", "NP22 4PS", "NP22 5PS"))
+ codes <- c("NP22 3PS", "NP22 4PS", "NP22 5PS")
+ get_postcode_data(codes)
+ my_fields <- c("postcode", "lsoa", "codes.lsoa", "eastings", "northings")
+ # get_postcode_data(codes, filter = my_fields) is fine, but using
+ # filter_fields() to wrap your vector gives you a validation check:
+ get_postcode_data(codes, filter = filter_fields(my_fields))
+ # The `schema_table` dataset within NHSRpostcodetools contains a "field"
+ # column with all available fields. You can use this as a starting point:
+ excl_fields <- setdiff(schema_table[["field"]], c("quality", "country"))
+ get_postcode_data(codes, filter = filter_fields(excl_fields))
+ # or use a helper function as a starting point to add to:
+ get_postcode_data(codes, TRUE, filter_fields(c(minimal_fields(), "region")))
 }

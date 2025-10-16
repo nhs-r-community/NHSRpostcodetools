@@ -4,7 +4,7 @@
 \alias{postcode_data_join}
 \title{Look up data for postcodes from a data frame column and join the results on}
 \usage{
-postcode_data_join(tbl, .col = "postcode", include_codes = TRUE)
+postcode_data_join(tbl, .col = "postcode", filter = filter_fields())
 }
 \arguments{
 \item{tbl}{A data frame}
@@ -12,11 +12,15 @@ postcode_data_join(tbl, .col = "postcode", include_codes = TRUE)
 \item{.col}{string. The name of the column that contains the postcodes.
 \code{"postcode"} by default.}
 
-\item{include_codes}{boolean, default \code{TRUE}. Include columns for the ONS
-administrative codes for geographic units in the returned tibble. Irrelevant
-if \code{as_list} is \code{TRUE}; in this case all ONS codes are included as a
-nested list in the list data for each postcode.
-See \url{https://postcodes.io/docs/postcode/lookup} for details}
+\item{filter}{character vector or helper function. The default is
+\link{filter_fields}, which by default evaluates to \code{NULL}, which means no
+fields will be filtered out from the returned data. You can also use
+\link{filter_fields} to validate a vector of field names that you supply - see
+Examples below.
+The full list of field names is available in the \link{schema_table} data. Some
+other helper functions are provided for common scenarios: \link{exclude_codes}
+and \link{minimal_fields}.
+See \url{https://postcodes.io/docs/postcode/bulk} for details.}
 }
 \description{
 Look up data for postcodes from a data frame column and join the results on
