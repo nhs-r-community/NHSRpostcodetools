@@ -43,3 +43,4 @@ Suggests:
 URL: https://nhs-r-community.github.io/NHSRpostcodetools/,
     https://github.com/nhs-r-community/NHSRpostcodetools
 BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
+LazyData: true

@@ -1,3 +1,22 @@
+#' Helper function to check a vector of fields to filter
+#' @param fields character vector. See [schema_table].
+#' @export
+filter_fields <- function(fields = NULL) {
+  if (!is.null(fields)) {
+    fields <- unique(rlang::arg_match(fields, schema_fields, multiple = TRUE))
+  }
+  fields
+}
+
+#' Provides a vector of fields to return, which excludes all ONS code fields
+#' @export
+exclude_codes <- \() purrr::discard(schema_fields, \(x) grepl("^codes", x))
+
+#' Provides a minimal vector of fields to return
+#' @export
+minimal_fields <- \() c("postcode", "lsoa", "msoa", "admin_district")
+
+
 #' Batch a vector or list into a list of elements with a maximum size
 #'
 #' @param x A vector or list

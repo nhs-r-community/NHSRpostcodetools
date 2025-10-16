@@ -11,7 +11,7 @@ test_that("basic test of functions", {
   )
   expect_length(out1, 37L)
 
-  out2 <- get_postcode_data(codes, include_codes = FALSE) |>
+  out2 <- get_postcode_data(codes, filter = exclude_codes()) |>
     expect_no_error()
   expect_identical(out2[["incode"]], c("3PS", "4PS", "5PS"))
   expect_length(out2, 20L)
@@ -22,7 +22,7 @@ test_that("basic test of functions", {
   codes_df <- tibble::tibble(code = paste0("code_", seq(3L)), codes = codes)
   out4 <- postcode_data_join(codes_df, .col = "codes") |>
     expect_no_error()
-  out5 <- postcode_data_join(codes_df, .col = "codes", include_codes = FALSE) |>
+  out5 <- postcode_data_join(codes_df, "codes", filter = exclude_codes()) |>
     expect_no_error()
   expect_identical(nrow(out3), 3L)
   expect_identical(nrow(out4), 3L)

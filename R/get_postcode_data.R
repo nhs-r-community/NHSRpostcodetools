@@ -7,16 +7,31 @@
 #' @param as_list boolean, default `FALSE`. The default behaviour is to
 #'  extract the data from the list and return it as a tibble. If set `TRUE`,
 #'  an unprocessed list of the JSON data from the API will be returned instead
-#' @param include_codes boolean, default `TRUE`. Include columns for the ONS
-#'  administrative codes for geographic units in the returned tibble. Irrelevant
-#'  if `as_list` is `TRUE`; in this case all ONS codes are included as a
-#'  nested list in the list data for each postcode.
-#'  See \url{https://postcodes.io/docs/postcode/lookup} for details
+#' @param filter character vector or helper function. The default is
+#'  [filter_fields], which by default evaluates to `NULL`, which means no
+#'  fields will be filtered out from the returned data. You can also use
+#'  [filter_fields] to validate a vector of field names that you supply - see
+#'  Examples below.
+#'  The full list of field names is available in the [schema_table] data. Some
+#'  other helper functions are provided for common scenarios: [exclude_codes]
+#'  and [minimal_fields].
+#'  See \url{https://postcodes.io/docs/postcode/bulk} for details.
 #' @examples
-#' get_postcode_data(c("NP22 3PS", "NP22 4PS", "NP22 5PS"))
+#'  codes <- c("NP22 3PS", "NP22 4PS", "NP22 5PS")
+#'  get_postcode_data(codes)
+#'  my_fields <- c("postcode", "lsoa", "codes.lsoa", "eastings", "northings")
+#'  # get_postcode_data(codes, filter = my_fields) is fine, but using
+#'  # filter_fields() to wrap your vector gives you a validation check:
+#'  get_postcode_data(codes, filter = filter_fields(my_fields))
+#'  # The `schema_table` dataset within NHSRpostcodetools contains a "field"
+#'  # column with all available fields. You can use this as a starting point:
+#'  excl_fields <- setdiff(schema_table[["field"]], c("quality", "country"))
+#'  get_postcode_data(codes, filter = filter_fields(excl_fields))
+#'  # or use a helper function as a starting point to add to:
+#'  get_postcode_data(codes, TRUE, filter_fields(c(minimal_fields(), "region")))
 #' @returns A tibble by default, otherwise a list if `as_list` is TRUE
 #' @export
-get_postcode_data <- function(x, as_list = FALSE, include_codes = TRUE) {
+get_postcode_data <- function(x, as_list = FALSE, filter = filter_fields()) {
   x <- unique(toupper(purrr::discard(x, is.na)))
   assertthat::assert_that(length(x) > 0L, msg = "No postcodes have been found.")
 
@@ -37,19 +52,18 @@ get_postcode_data <- function(x, as_list = FALSE, include_codes = TRUE) {
   if (length(valid_codes) > 0L) {
     results_list <- valid_codes |>
       batch_it(100L) |>
-      purrr::map(bulk_lookup, .progress = "Looking up postcode data...")
+      purrr::map(
+        \(x) bulk_lookup(x, filter_fields = filter),
+        .progress = "Looking up postcode data..."
+      )
 
     if (as_list) {
       results_list
     } else {
-      results_df <- tibblise_results_list(results_list)
-      if (!include_codes) {
-        dplyr::select(results_df, !tidyselect::ends_with("_code"))
-      } else {
-        results_df
-      }
+      tibblise_results_list(results_list)
     }
   } else {
+    cli::cli_alert_warning("No valid postcodes were supplied")
     invisible(NULL)
   }
 }
@@ -69,12 +83,23 @@ get_postcode_data <- function(x, as_list = FALSE, include_codes = TRUE) {
 #' ) |>
 #'   postcode_data_join()
 #' @export
-postcode_data_join <- function(tbl, .col = "postcode", include_codes = TRUE) {
+postcode_data_join <- function(
+  tbl,
+  .col = "postcode",
+  filter = filter_fields()
+) {
   assertthat::assert_that(
     inherits(tbl, "data.frame"),
     .col %in% colnames(tbl)
   )
-  api_data <- get_postcode_data(tbl[[.col]], include_codes = include_codes)
+  assertthat::assert_that(
+    (is.null(filter) || "postcode" %in% filter),
+    msg = cli::cli_abort(paste0(
+      "The {.val postcode} field must be included in {.arg filter} in order ",
+      "for {.fn postcode_data_join} to work."
+    ))
+  )
+  api_data <- get_postcode_data(tbl[[.col]], filter = filter)
   dplyr::left_join(tbl, api_data, by = dplyr::join_by({{ .col }} == "postcode"))
 }
 
