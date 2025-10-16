@@ -3,15 +3,15 @@
 
 <!-- badges: start -->
 
-![GitHub License][gh_licence]
+![MIT License][gh_licence]
 [![Project Status: Active – The project has reached a stable, usable state and
 is being actively developed][repostatus_svg]][repostatus_info]
 ![GitHub R package version][gh_ver]
 
-[gh_licence]: https://img.shields.io/github/license/nhs-r-community/NHSRpostcodetools
-[gh_ver]: https://img.shields.io/github/r-package/v/nhs-r-community/NHSRpostcodetools
+[gh_licence]: https://img.shields.io/badge/licence-MIT-blue?style=plastic
 [repostatus_info]: https://www.repostatus.org/#active
 [repostatus_svg]: https://www.repostatus.org/badges/latest/active.svg
+[gh_ver]: https://img.shields.io/github/r-package/v/nhs-r-community/NHSRpostcodetools
 <!-- badges: end -->
 
 The package helps you send a collection of UK postcodes to the
@@ -78,29 +78,27 @@ So if your postcode data has "NR22 3PS" when it should have "NP22 3PS", you are
 on your own 😜! Please sense-check your data before using `suggest_fixes()`,
 and use care when implementing its suggestions.
 
-[repo]: https://github.com/nhs-r-community/NHSRpostcodetools
-
 
 ## Further guidance on usage
 
 The [package website][intro] contains more guidance on how to use the functions
 in this package, and what to expect.
 
-[intro]: https://nhs-r-community.github.io/NHSRpostcodetools/
-
 
 ## Getting help and getting involved
 
 If you experience any problems using this package, find a bug, or have ideas
-for how to improve it, you are welcome to [create a GitHub issue][issues].
+for how to improve it, you are welcome to [create a GitHub issue][issues], or
+you may prefer to start a thread in the [Discussions][discussions] area.
 
 Before submitting your issue, please read the NHS-R Community's
 [guidance on how to contribute to packages][tools].
 
-[issues]: https://github.com/nhs-r-community/NHSRpostcodetools/issues
-[tools]: https://tools.nhsrcommunity.com/contribution.html
-
 This project is released with a [Contributor Code of Conduct][coc].
 By contributing to this project, you agree to abide by its terms.
 
+[repo]: https://github.com/nhs-r-community/NHSRpostcodetools/
+[intro]: https://nhs-r-community.github.io/NHSRpostcodetools/
+[issues]: https://github.com/nhs-r-community/NHSRpostcodetools/issues
+[tools]: https://tools.nhsrcommunity.com/contribution.html
 [coc]: CODE_OF_CONDUCT.md

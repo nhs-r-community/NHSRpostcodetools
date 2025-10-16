@@ -20,7 +20,7 @@ Description: Extracts data from the postcodes.io API for collections of UK
     postcodes, such as their LSOA (or equivalent), parliamentary constituency,
     and spatial coordinates. It can also check postcodes for currency/validity
     and suggest replacement current postcodes for terminated codes.
-License: MIT + file LICENSE
+License: MIT + file LICENCE
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)

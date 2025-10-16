@@ -24,8 +24,8 @@ knitr::opts_chunk$set(
 library(NHSRpostcodetools)
 ```
 
-Both vectors and tibbles can be passed through the functions. 
-Starting with a vector of postcodes with the first being terminated, the second  
+Both vectors and tibbles can be passed through the functions.
+Starting with a vector of postcodes with the first being terminated, the second
 is valid and the third is invalid.
 
 ### A vector of postcodes
