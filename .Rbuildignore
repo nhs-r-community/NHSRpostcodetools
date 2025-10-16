@@ -1,6 +1,6 @@
 ^NHSRpostcodetools\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
+^LICENCE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^.*\.code-workspace$
 ^_pkgdown\.yml$
