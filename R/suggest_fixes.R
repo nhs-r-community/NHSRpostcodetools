@@ -1,4 +1,4 @@
-#' Return data for suggested replacements for invalid postcodes
+#' Return a table with suggested replacements for invalid postcodes
 #'
 #' Data for terminated invalid codes will be returned according to the nearest
 #' current valid code for the old code's longitude/latitude, if possible.
@@ -10,110 +10,88 @@
 #'
 #' @param codes A character vector of postcodes to be checked for validity
 #' @returns A data frame with a row for each invalid postcode supplied.
-#' @examples suggest_fixes(c("hd1 2ut", "hd1 2uu", "hd1 2uv"))
+#' @examples suggest_fixes(c("NP22 3PQ", "NP22 3PR", "NP22 3MN"))
 #' @export
 suggest_fixes <- function(codes) {
   codes <- unique(toupper(purrr::discard(codes, is.na)))
   assertthat::assert_that(
     rlang::is_character(codes),
-    length(codes) > 0
+    length(codes) > 0L
   )
-  valid_index <- codes |>
-    purrr::map_lgl(validate_code, .progress = "Checking postcodes...")
+  valid_index <- purrr::map_lgl(codes, validate_code)
   invalid_codes <- codes[!valid_index]
 
   if (length(invalid_codes) == 0L) {
-    "{.fn postcode_data_join} found no postcodes that need fixing." |>
+    "{.fn suggest_fixes} found no postcodes that need fixing." |>
       cli::cli_alert_success()
-    invisible(NULL)
+    invisible(codes)
   } else {
-    terminated_codes_data <- invalid_codes |>
+    terminated_codes_list <- invalid_codes |>
       purrr::map(check_terminated_possibly) |>
-      purrr::compact() |>
-      purrr::map(tibble::as_tibble_row) |>
-      purrr::list_rbind()
-    if (nrow(terminated_codes_data) > 0L) {
-      fixed_terminated_data <- fix_terminated(terminated_codes_data)
+      purrr::compact()
+    if (length(terminated_codes_list) > 0L) {
+      fixed_terminated_data <- terminated_codes_list |>
+        purrr::map(tibble::as_tibble_row) |>
+        purrr::list_rbind() |>
+        dplyr::select(c("postcode", "longitude", "latitude")) |>
+        fix_terminated()
     } else {
-      fixed_terminated_data <- NULL
+      fixed_terminated_data <- zero_row()
     }
-    if (!is.null(fixed_terminated_data)) {
-      unfixed_codes <- invalid_codes |>
-        setdiff(fixed_terminated_data[["postcode"]])
-    } else {
-      unfixed_codes <- invalid_codes
-    }
+    unfixed_codes <- setdiff(invalid_codes, fixed_terminated_data[["postcode"]])
+
     if (length(unfixed_codes) > 0L) {
       fixed_autocomplete_data <- fix_by_autocomplete(unfixed_codes)
     } else {
-      fixed_autocomplete_data <- NULL
+      fixed_autocomplete_data <- zero_row()
     }
 
-    fixed_results <- list(
-      `original code terminated` = fixed_terminated_data,
-      `original code invalid` = fixed_autocomplete_data
-    ) |>
-      purrr::list_rbind(names_to = "notes")
+    fixed <- dplyr::bind_rows(fixed_terminated_data, fixed_autocomplete_data)
 
     tibble::tibble(postcode = invalid_codes) |>
-      dplyr::left_join(fixed_results, "postcode") |>
+      dplyr::left_join(fixed, "postcode") |>
       dplyr::mutate(
-        dplyr::across("notes", \(x) tidyr::replace_na(x, "unable to fix"))
+        dplyr::across("note", \(x) tidyr::replace_na(x, "unable to fix"))
       )
   }
 }
 
 
+#' Use reverse geocoding to suggest replacements for terminated postcodes
+#' @keywords internal
 fix_terminated <- function(dat) {
-  geocoded_data <- bulk_reverse_geocode(dat)
+  geocoded_data <- reverse_geocode(dat)
   if (nrow(geocoded_data) > 0L) {
-    fixed_terminated_codes <- geocoded_data |>
-      dplyr::rename(new_postcode = "postcode")
     dat |>
-      dplyr::rename_with(
-        \(x) paste0("orig_", x),
-        .cols = tidyselect::ends_with("tude")
-      ) |>
-      dplyr::inner_join(
-        fixed_terminated_codes,
-        c("orig_longitude", "orig_latitude")
-      ) |>
-      dplyr::select(!c("orig_longitude", "orig_latitude"))
+      dplyr::inner_join(geocoded_data, c("longitude", "latitude")) |>
+      dplyr::select(c("postcode", "new_postcode")) |>
+      dplyr::mutate(note = "terminated code fixed by reverse geocoding")
   } else {
-    NULL
+    zero_row()
   }
 }
 
 
+#' Use the autocompletion API to suggest replacements for invalid postcodes
+#' @keywords internal
 fix_by_autocomplete <- function(codes) {
-  autocomplete_results <- purrr::map_chr(codes, autocomplete_possibly)
-
-  ac_data <- tibble::tibble(
-    postcode = codes,
-    new_postcode = autocomplete_results
-  )
-  ac_codes <- purrr::discard(autocomplete_results, is.na)
-
-  if (length(ac_codes) > 0L) {
-    fixed_ac_data <- ac_codes |>
-      batch_it(100L) |>
-      purrr::map(bulk_lookup) |>
-      tibblise_results_list() |>
-      dplyr::rename(new_postcode = "postcode")
-    dplyr::left_join(ac_data, fixed_ac_data, "new_postcode")
+  completed_codes <- purrr::map_chr(codes, autocomplete_possibly)
+  if (length(completed_codes) > 0L) {
+    tibble::tibble(postcode = codes, new_postcode = completed_codes) |>
+      dplyr::filter(!dplyr::if_any("new_postcode", is.na)) |>
+      dplyr::mutate(note = "fixed by autocompletion")
   } else {
-    ac_data
+    zero_row()
   }
 }
 
 
-tibblise_results_list <- function(results_list) {
-  results_list |>
-    purrr::map("result") |>
-    purrr::list_flatten() |>
-    purrr::map("result") |>
-    purrr::map(purrr::compact) |>
-    purrr::map(\(x) purrr::list_flatten(x, name_spec = "{inner}_code")) |>
-    purrr::map(tibble::as_tibble_row) |>
-    purrr::list_rbind()
+#' A convenience function to generate a 0-row tibble to support suggest_fixes()
+#' @keywords internal
+zero_row <- function() {
+  tibble::tibble(
+    postcode = character(),
+    new_postcode = character(),
+    note = NA_character_
+  )
 }
