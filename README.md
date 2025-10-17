@@ -20,14 +20,13 @@ is being actively developed][repostatus_svg]][repostatus_info]
 <div style="flex: 0 0 auto; margin-right: 20px;">
 <img
     src="inst/nhsrpt_hex_badgev2.png"
-    height="300px" width="260px" hspace=20 vspace=20
+    height="240px" width="208px" hspace=20 vspace=20
     alt="The NHSRPostcodeTools package hexagonal logo - the phrases 'NHS-R' and
       'postcode tools' in yellow superimposed on a Royal Mail-type red
       background, with a picture of Postman Pat and his black and white cat
       also added into the image. The background features a faint line map of
       the boundaries of the Falkirk (FK) postcode area and its neighbours."
 />
-<br clear="all" />
 </div>
 
 <div>
@@ -40,6 +39,8 @@ areas, and other information such as the statistical, administrative and health
 geographies the postcodes sit within.
 For example: its LSOA (or equivalent), local authority, and parliamentary
 constituency.
+
+<br clear="all" />
 
 The package also helps you check a list of postcodes for currency/validity,
 and suggests replacement current postcodes for terminated (out of date) codes.
