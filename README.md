@@ -19,7 +19,7 @@ is being actively developed][repostatus_svg]][repostatus_info]
 <div>
 <img
     src="inst/nhsrpt_hex_badgev2.png"
-    height="240px" width="208px" hspace=20 vspace=20 align="left"
+    height="300px" width="260px" hspace=20 vspace=20 align="left"
     alt="The NHSRPostcodeTools package hexagonal logo - the phrases 'NHS-R' and
       'postcode tools' in yellow superimposed on a Royal Mail-type red
       background, with a picture of Postman Pat and his black and white cat
@@ -36,11 +36,11 @@ geographies the postcodes sit within.
 For example: its LSOA (or equivalent), local authority, and parliamentary
 constituency.
 
-<br clear="all" />
-</div>
-
 The package also helps you check a list of postcodes for currency/validity,
 and suggests replacement current postcodes for terminated (out of date) codes.
+
+<br clear="all" />
+</div>
 
 [api]: https://postcodes.io/
 
