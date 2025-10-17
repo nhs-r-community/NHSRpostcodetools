@@ -1,0 +1,49 @@
+---
+title: The postcodes.io API schema
+vignette: >
+  %\VignetteIndexEntry{The postcodes.io API schema}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+df-print: tibble
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(NHSRpostcodetools)
+```
+
+The package contains two items of data.
+One that is available to the user is a copy of the postcodes.io API postcode
+data schema, as published at [https://postcodes.io/docs/postcode/schema][sch]
+
+[sch]: https://postcodes.io/docs/postcode/schema
+
+This can be accessed with
+
+```{r}
+#| label: schema_table
+schema_table
+```
+
+
+A vector of all the field names in the schema is also available, but only as
+internal data, which means you will need to use `:::` to access it:
+
+```{r}
+#| label: schema_fields
+NHSRpostcodetools:::schema_fields
+```
+
+This vector may be useful if you want to construct a custom vector of fields
+to pass to `filter_fields()`.
+
+`schema_fields` is actually identical to the `field` column in `schema_table`:
+
+```{r}
+#| label: ident
+identical(NHSRpostcodetools:::schema_fields, schema_table[["field"]])
+```

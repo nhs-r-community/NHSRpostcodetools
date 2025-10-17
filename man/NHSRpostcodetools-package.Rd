@@ -6,7 +6,7 @@
 \alias{NHSRpostcodetools-package}
 \title{NHSRpostcodetools: Get geographic and administrative data about UK postcodes}
 \description{
-Extracts data from the postcodes.io API for collections of UK postcodes, such as their LSOA (or equivalent), parliamentary constituency, and spatial coordinates. It can also check postcodes for currency/validity and suggest replacement current postcodes for terminated codes.
+The main purpose of the package is to extract data from the postcodes.io API for collections of UK postcodes, such as their LSOA (or equivalent), parliamentary constituency, and spatial coordinates. It can also check postcodes for currency/validity and suggest replacement current postcodes for terminated codes.
 }
 \seealso{
 Useful links:
@@ -18,16 +18,16 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Zoë Turner \email{zoe.turner3@nhs.net} (\href{https://orcid.org/0000-0003-1033-9158}{ORCID})
+\strong{Maintainer}: Fran Barton \email{francis.barton@nhs.net} (\href{https://orcid.org/0000-0002-5650-1176}{ORCID})
 
 Authors:
 \itemize{
-  \item Fran Barton \email{francis.barton@nhs.net} (\href{https://orcid.org/0000-0002-5650-1176}{ORCID})
+  \item Zoë Turner \email{zoe.turner3@nhs.net} (\href{https://orcid.org/0000-0003-1033-9158}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item NHS-R community \email{nhs.rcommunity@nhs.net} [copyright holder]
+  \item NHS-R Community \email{nhs.rcommunity@nhs.net} [copyright holder]
 }
 
 }
