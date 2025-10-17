@@ -16,20 +16,16 @@ is being actively developed][repostatus_svg]][repostatus_info]
 
 ## Get geographic and administrative data about UK postcodes
 
-<div style="display: flex; align-items: center;">
-<div style="flex: 0 0 auto; margin-right: 20px;">
+<div>
 <img
     src="inst/nhsrpt_hex_badgev2.png"
-    height="240px" width="208px" hspace=20 vspace=20
+    height="240px" width="208px" hspace=20 vspace=20 align="left"
     alt="The NHSRPostcodeTools package hexagonal logo - the phrases 'NHS-R' and
       'postcode tools' in yellow superimposed on a Royal Mail-type red
       background, with a picture of Postman Pat and his black and white cat
       also added into the image. The background features a faint line map of
       the boundaries of the Falkirk (FK) postcode area and its neighbours."
 />
-</div>
-
-<div>
 
 The package helps you send a collection of UK postcodes to the
 [postcodes.io API][api], and handles the data returned by the API.
@@ -41,15 +37,12 @@ For example: its LSOA (or equivalent), local authority, and parliamentary
 constituency.
 
 <br clear="all" />
+</div>
 
 The package also helps you check a list of postcodes for currency/validity,
 and suggests replacement current postcodes for terminated (out of date) codes.
 
 [api]: https://postcodes.io/
-
-</div>
-</div>
-
 
 ## Installation and basic usage
 
