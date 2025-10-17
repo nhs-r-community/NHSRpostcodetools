@@ -8,6 +8,9 @@
 #' be replaced using the two methods above.
 #' Any valid codes will be excluded from the returned data frame.
 #'
+#' Consider using [tidy_postcodes] to normalise formatting as far as possible
+#'  before using this function.
+#'
 #' @param codes A character vector of postcodes to be checked for validity
 #' @returns A data frame with a row for each invalid postcode supplied.
 #' @examples suggest_fixes(c("NP22 3PQ", "NP22 3PR", "NP22 3MN"))

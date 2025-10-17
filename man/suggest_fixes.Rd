@@ -21,6 +21,10 @@ Missing data will be returned for any other invalid postcodes that could not
 be replaced using the two methods above.
 Any valid codes will be excluded from the returned data frame.
 }
+\details{
+Consider using \link{tidy_postcodes} to normalise formatting as far as possible
+before using this function.
+}
 \examples{
 suggest_fixes(c("NP22 3PQ", "NP22 3PR", "NP22 3MN"))
 }

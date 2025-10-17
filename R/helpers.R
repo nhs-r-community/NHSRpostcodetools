@@ -17,6 +17,20 @@ exclude_codes <- \() purrr::discard(schema_fields, \(x) grepl("^codes", x))
 minimal_fields <- \() c("postcode", "lsoa", "msoa", "admin_district")
 
 
+#' Try to format a list of postcodes to the "A(A)D(D) DAA" PCD8 format
+#'
+#' @param x A character vector
+#' @returns A character vector
+#' @export
+tidy_postcodes <- function(x) {
+  rx <- glue::glue_data(
+    list(a = "A-Z", d = "0-9"),
+    "[^{a}]*([{a}]{{1,2}})[^{d}]*([{d}]{{1,2}}).*([{d}]{{1}})([{a}]{{2}}).*$"
+  )
+  sub(rx, "\\1\\2 \\3\\4", gsub("[^[:alnum:]]", "", toupper(x)))
+}
+
+
 #' Batch a vector or list into a list of elements with a maximum size
 #'
 #' @param x A vector or list
