@@ -14,11 +14,11 @@ is being actively developed][repostatus_svg]][repostatus_info]
 [gh_ver]: https://img.shields.io/github/r-package/v/nhs-r-community/NHSRpostcodetools
 <!-- badges: end -->
 
-## Get geographic and administrative data about UK postcodes
+## Get geographic and administrative data about UK postcodes  <a href="https://nhs-r-community.github.io/NHSRpostcodetools/"><img src="man/figures/logo.png" align="right" height="150" alt="NHSRpostcodetools website" /></a>
 
 <div>
 <img
-    src="inst/nhsrpt_hex_badgev2.png"
+    src="vignettes/nhsrpt_hex_badgev2.png"
     height="300px" width="260px" hspace=20 vspace=20 align="left"
     alt="The NHSRPostcodeTools package hexagonal logo - the phrases 'NHS-R' and
       'postcode tools' in yellow superimposed on a Royal Mail-type red
