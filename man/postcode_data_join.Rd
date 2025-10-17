@@ -23,7 +23,11 @@ and \link{minimal_fields}.
 See \url{https://postcodes.io/docs/postcode/bulk} for details.}
 }
 \description{
-Look up data for postcodes from a data frame column and join the results on
+Please note that the function will attempt to format the postcode column to
+match the standard "A(A)D(D) DAA" format. This is necessary for the join to
+succeed! You can use the \link{tidy_postcodes} function yourself in order to have
+more supervision of this formatting - or potentially before running
+\link{suggest_fixes}.
 }
 \examples{
 tibble::tibble(

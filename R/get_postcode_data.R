@@ -71,6 +71,12 @@ get_postcode_data <- function(x, as_list = FALSE, filter = filter_fields()) {
 
 #' Look up data for postcodes from a data frame column and join the results on
 #'
+#' Please note that the function will attempt to format the postcode column to
+#'  match the standard "A(A)D(D) DAA" format. This is necessary for the join to
+#'  succeed! You can use the [tidy_postcodes] function yourself in order to have
+#'  more supervision of this formatting - or potentially before running
+#'  [suggest_fixes].
+#'
 #' @param tbl A data frame
 #' @param .col string. The name of the column that contains the postcodes.
 #'   `"postcode"` by default.
@@ -99,6 +105,7 @@ postcode_data_join <- function(
       "for {.fn postcode_data_join} to work."
     ))
   )
+  tbl <- dplyr::mutate(tbl, dplyr::across({{ .col }}, tidy_postcodes))
   api_data <- get_postcode_data(tbl[[.col]], filter = filter)
   dplyr::left_join(tbl, api_data, by = dplyr::join_by({{ .col }} == "postcode"))
 }
