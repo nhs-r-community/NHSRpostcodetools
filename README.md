@@ -14,22 +14,35 @@ is being actively developed][repostatus_svg]][repostatus_info]
 [gh_ver]: https://img.shields.io/github/r-package/v/nhs-r-community/NHSRpostcodetools
 <!-- badges: end -->
 
+## Get geographic and administrative data about UK postcodes
+
+<div>
+<img
+    src="inst/nhsrpt_hex_badgev2.png"
+    height="300px" width="260px" hspace=20 vspace=20 align="left"
+    alt="The NHSRPostcodeTools package hexagonal logo - the phrases 'NHS-R' and
+      'postcode tools' in yellow superimposed on a Royal Mail-type red
+      background, with a picture of Postman Pat and his black and white cat
+      also added into the image. The background features a faint line map of
+      the boundaries of the Falkirk (FK) postcode area and its neighbours."
+/>
+
 The package helps you send a collection of UK postcodes to the
-[postcodes.io][pcio] API, and handles the data returned by the API.
+[postcodes.io API][api], and handles the data returned by the API.
 
 This gives you easy access to the coordinates of the centroids of the postcode
 areas, and other information such as the statistical, administrative and health
 geographies the postcodes sit within.
-
 For example: its LSOA (or equivalent), local authority, and parliamentary
 constituency.
 
 The package also helps you check a list of postcodes for currency/validity,
-and suggests replacement current postcodes for any terminated (out of date)
-codes.
+and suggests replacement current postcodes for terminated (out of date) codes.
 
-[pcio]: https://postcodes.io/
+<br clear="all" />
+</div>
 
+[api]: https://postcodes.io/
 
 ## Installation and basic usage
 
