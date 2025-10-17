@@ -1,19 +1,11 @@
 url: https://nhs-r-community.github.io/NHSRpostcodetools/
 template:
   bootstrap: 5
+  bootswatch: sandstone
+  light-switch: true
+  theme: ayu-light
+  theme-dark: ayu-dark
 navbar:
   structure:
-    left:
-    - intro
-    - articles
-    - news
-    right:
-    - search
-    - reference
-    - github
-
-authors:
-  footer:
-    roles: [aut]
-  sidebar:
-    roles: [aut]
+    left:  [intro, reference, articles, news]
+    right: [search, github, lightswitch]

@@ -1,0 +1,154 @@
+---
+title: "How to use NHSRpostcodetools"
+vignette: >
+  %\VignetteIndexEntry{How to use NHSRpostcodetools}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+The goal of NHSRpostcodetools is to make it really easy to get data about
+UK postcode locations.
+You can supply a list of postcodes, and the package will send these off to the
+[postcodes.io API][api] and handle the data that is returned.
+
+[api]: https://postcodes.io/
+
+
+## The basics
+
+
+### Installing NHSRpostcodetools
+
+You can install the package by using the `{pak}` package:
+
+```r
+# install.packages("pak") # <- run this if you don't yet have {pak} installed
+
+# install the package from GitHub:
+pak::pak("nhs-r-community/NHSRpostcodetools")
+
+# load the package with `library()`
+library(NHSRpostcodetools)
+```
+
+
+### The main functions
+
+```{r}
+#| label: setup
+#| echo: false
+library(NHSRpostcodetools)
+```
+
+
+First, let's get some data to work with.
+A list of postcodes for municipal libraries in Blaenau Gwent[^1].
+
+[^1]: Why? Well this is an NHS-R Community package, and Tredegar is the
+  birthplace of [Aneurin Bevan][ab]. It'll do as an example dataset!
+
+[ab]: https://en.wikipedia.org/wiki/Aneurin_Bevan
+
+The object `bg_libraries` is a data frame containing the names and postcodes of
+six public libraries.
+We expect that all the postcodes are valid and current!
+
+We also pull out just the postcodes as a character vector `bg_postcodes`.
+
+```{r}
+#| label: libraries data in
+#| echo: false
+#| eval: false
+
+page_data <- rvest::read_html("https://www.aneurinleisure.org.uk/libraries")
+
+# scrape data from website, and tidy (using page structure as at October 2025)
+bg_libraries_vec <- page_data |>
+  rvest::html_element("#sections section:nth-of-type(3)") |>
+  rvest::html_elements(".sqs-html-content p:nth-of-type(-n + 2)") |>
+  rvest::html_text2() |>
+  sub("^.*\\n([[:print:]]+)$", "\\1", x = _)
+
+vec_pair_nms <- \(v) setNames(v[seq(2, length(v), 2)], v[seq(1, length(v), 2)])
+
+# write to a tibble, then copy to clipboard and paste as tribble in next chunk
+vec_pair_nms(bg_libraries_vec) |>
+  tibble::enframe("library", "postcode") |>
+  datapasta::tribble_construct() |>
+  utils::writeClipboard()
+
+```
+
+```{r}
+#| label: libraries tribble
+# fmt: skip
+bg_libraries <- tibble::tribble(
+               ~library,  ~postcode,
+  "Abertillery Library", "NP13 1DB",
+       "Blaina Library", "NP13 3BN",
+     "Brynmawr Library", "NP23 4AJ",
+          "Cwm Library", "NP23 7RW",
+    "Ebbw Vale Library", "NP23 6HS",
+     "Tredegar Library", "NP22 3PS"
+  )
+
+bg_postcodes <- bg_libraries[["postcode"]]
+
+bg_libraries
+
+
+```
+
+In order to get the postcode data, you can just pass the vector to
+`get_postcode_data()`.
+This should return a wide table of data from the API.
+
+```{r}
+#| label: get postcode data
+
+get_postcode_data(bg_postcodes)
+
+```
+
+
+<span style="color:green;">!</span>\tTo learn how to customise the fields that
+  are returned, see [filtering](filtering.html)
+
+Alternatively, you might want the data to be returned as a list.
+
+```{r}
+#| label: as list
+
+get_postcode_data(bg_postcodes[[6]], as_list = TRUE)
+
+```
+
+
+If you already have your postcodes as a column in a data frame, you can use
+`postcode_data_join()` to join on the returned data.
+(In this scenario the `as_list` parameter is ignored).
+By default `postcode_data_join()` expects the postcodes to be in a column called
+`postcode`, but if they are not you can specify the column name using `.col`.
+
+Here we change the column name just to illustrate how this works
+
+```{r}
+#| label: postcode data join
+
+bg_libraries2 <- dplyr::rename(bg_libraries, locations = "postcode")
+
+postcode_data_join(bg_libraries2, .col = "locations")
+
+```
+
+
+## Customising
+
+
+
+
+## Conversion to an `{sf}` geospatial dataset

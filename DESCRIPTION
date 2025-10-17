@@ -4,34 +4,40 @@ Version: 0.0.9
 Authors@R:
     c(
         person(
-            "Zoë", "Turner", , "zoe.turner3@nhs.net", c("cre", "aut"),
-            comment = c(ORCID = "0000-0003-1033-9158")
-        ),
-        person(
-            "Fran", "Barton", , "francis.barton@nhs.net", "aut",
+            "Fran", "Barton", email = "francis.barton@nhs.net",
+            role = c("cre", "aut"),
             comment = c(ORCID = "0000-0002-5650-1176")
         ),
         person(
-            "NHS-R community", email = "nhs.rcommunity@nhs.net", role = "cph"
+            "Zoë", "Turner", email = "zoe.turner3@nhs.net",
+            role = "aut",
+            comment = c(ORCID = "0000-0003-1033-9158")
+        ),
+        person(
+            "NHS-R Community", email = "nhs.rcommunity@nhs.net", role = "cph"
         )
     )
-Maintainer: Zoë Turner <zoe.turner3@nhs.net>
-Description: Extracts data from the postcodes.io API for collections of UK
-    postcodes, such as their LSOA (or equivalent), parliamentary constituency,
-    and spatial coordinates. It can also check postcodes for currency/validity
-    and suggest replacement current postcodes for terminated codes.
+Maintainer: Fran Barton <francis.barton@nhs.net>
+Description: The main purpose of the package is to extract data from the
+    postcodes.io API for collections of UK postcodes, such as their LSOA (or
+    equivalent), parliamentary constituency, and spatial coordinates. It can
+    also check postcodes for currency/validity and suggest replacement current
+    postcodes for terminated codes.
 License: MIT + file LICENCE
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
+LazyData: true
+VignetteBuilder: quarto
+Config/Needs/website: quarto
 Config/testthat/edition: 3
-VignetteBuilder: knitr
 Depends:
     R (>= 4.4.0)
 Imports:
     assertthat,
     cli,
     dplyr (>= 1.1.0),
+    glue,
     httr2 (>= 1.0.0),
     purrr (>= 1.0.0),
     rlang,
@@ -39,8 +45,10 @@ Imports:
     tidyr,
     utils
 Suggests:
+    knitr,
+    quarto,
+    rvest,
     testthat (>= 3.0.0)
 URL: https://nhs-r-community.github.io/NHSRpostcodetools/,
     https://github.com/nhs-r-community/NHSRpostcodetools
 BugReports: https://github.com/nhs-r-community/NHSRpostcodetools/issues
-LazyData: true

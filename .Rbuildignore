@@ -11,3 +11,8 @@
 ^[.]?air[.]toml$
 ^\.vscode$
 ^data-raw$
+^vignettes/\.quarto$
+^vignettes/*_files$
+^vignettes/articles/\.quarto$
+^vignettes/articles/*_files$
+^vignettes/articles$

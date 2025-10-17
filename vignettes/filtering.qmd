@@ -1,0 +1,16 @@
+---
+title: "Choosing data fields with `filter`"
+vignette: >
+  %\VignetteIndexEntry{Choosing data fields with `filter`}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(NHSRpostcodetools)
+```
