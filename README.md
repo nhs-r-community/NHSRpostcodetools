@@ -102,7 +102,7 @@ in this package, and what to expect.
 
 If you experience any problems using this package, find a bug, or have ideas
 for how to improve it, you are welcome to [create a GitHub issue][issues], or
-you may prefer to start a thread in the [Discussions][discussions] area.
+you may prefer to start a thread in the [Discussions](discussions) area.
 
 Before submitting your issue, please read the NHS-R Community's
 [guidance on how to contribute to packages][tools].
