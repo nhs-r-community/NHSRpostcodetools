@@ -31,6 +31,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        env:
+           R_QUARTO_QUIET: FALSE
         with:
           extra-packages: any::pkgdown, quarto=quarto-dev/quarto-r@libpaths, local::.
           needs: website
